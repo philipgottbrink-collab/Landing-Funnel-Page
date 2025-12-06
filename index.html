@@ -108,12 +108,12 @@ display: inline-block;
 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 color: white;
 padding: 28px 60px; 
-font-size: 24px;      
+font-size: 24px;      
 font-weight: 700;
 text-decoration: none;
 border-radius: 55px;
 cursor: pointer;
-min-width: 320px;     
+min-width: 320px;     
 transition: all 0.3s ease;
 }
 .cta-button:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(102,126,234,0.5); }
@@ -168,21 +168,18 @@ margin-bottom: 20px;
 display: flex;
 justify-content: space-between;
 gap: 10px;
-flex-wrap: wrap;
+flex-wrap: nowrap;
+overflow-x: auto;
 }
-.video-feed-container .feed-video {
-flex: 1;
-min-width: 30%;
-background: #ccc;
+.video-feed-container video {
+flex: 0 0 30%;
+height: 250px;
 border-radius: 12px;
-overflow: hidden;
-position: relative;
-display: flex;
-align-items: center;
-justify-content: center;
-height: 150px;
-font-weight: 700;
-color: #fff;
+object-fit: cover;
+cursor: pointer;
+}
+.video-feed-container video::-webkit-media-controls {
+border-radius: 12px;
 }
 
 @media (max-width: 480px) {
@@ -192,8 +189,8 @@ color: #fff;
 .input-help { font-size: 11px; }
 .cta-text { font-size: 20px; }
 .cta-button { font-size: 20px; padding: 22px 50px; }
-.video-feed-container { flex-direction: column; }
-.video-feed-container .feed-video { min-width: 100%; height: 120px; }
+.video-feed-container video { flex: 0 0 80%; height: 220px; margin-bottom: 10px; }
+.video-feed-container { flex-wrap: nowrap; }
 }
 </style>
 </head>
@@ -274,19 +271,19 @@ Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
 <!-- Videos -->
 <div class="video-section locked" id="explanationVideoSection">🔒 Introvideo – låst</div>
 
-<!-- NEW VIDEO FEED SECTION -->
+<!-- VIDEO FEED SECTION -->
 <div class="video-feed">
   <h2>Watch These Videos</h2>
   <div class="video-feed-container">
-    <video class="feed-video" controls poster="poster1.png">
+    <video controls poster="poster1.png">
       <source src="ai_in_action.mp4" type="video/mp4">
       Din webbläsare stödjer inte videouppspelning.
     </video>
-    <video class="feed-video" controls poster="poster2.png">
+    <video controls poster="poster2.png">
       <source src="lead_gen_secrets.mp4" type="video/mp4">
       Din webbläsare stödjer inte videouppspelning.
     </video>
-    <video class="feed-video" controls poster="poster3.png">
+    <video controls poster="poster3.png">
       <source src="sales_funnel_tips.mp4" type="video/mp4">
       Din webbläsare stödjer inte videouppspelning.
     </video>
@@ -306,16 +303,16 @@ Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
 
 <div class="cta-section">
 <p class="cta-text">
-   Se vilka <span class="highlight-green">AI-lösningar</span> som just ert företag hade behövt, 
-   för att inte gå <span class="highlight-red">miste om intäkter varje månad</span>. 
-   Redo att ta <span class="highlight-green">nästa steg</span>?
+  Se vilka <span class="highlight-green">AI-lösningar</span> som just ert företag hade behövt, 
+  för att inte gå <span class="highlight-red">miste om intäkter varje månad</span>. 
+  Redo att ta <span class="highlight-green">nästa steg</span>?
 </p>
 <a href="https://calendly.com/philip-gottbrink/30min" 
-    class="cta-button" 
-    id="bookingButton" 
-    target="_blank" 
-    rel="noopener noreferrer">
-   🚀Boka ett kostnadsfritt möte
+   class="cta-button" 
+   id="bookingButton" 
+   target="_blank" 
+   rel="noopener noreferrer">
+  🚀Boka ett kostnadsfritt möte
 </a>
 <p class="cta-subtext">Kostnadsfri konsultation • 30 minuter</p>
 </div>
@@ -349,25 +346,12 @@ const totalRevenueLastMonth = parseFloat(totalRevenueLastMonthInput.value) || 0;
 const projectsLastMonth = parseFloat(projectsLastMonthInput.value) || 0;
 const adminHours = parseFloat(adminHoursInput.value) || 0;
 
-// Beräkna konverteringsgrad automatiskt
 const conversionRate = inquiries > 0 ? (projectsLastMonth / inquiries) * 100 : 0;
-
-// Beräkna genomsnittligt värde per projekt
 const projectValue = projectsLastMonth > 0 ? totalRevenueLastMonth / projectsLastMonth : 0;
-
-// Nuvarande intäkt
 const currentRevenue = projectsLastMonth * projectValue;
-
-// Förbättrad konvertering
 const improvedConversionRate = Math.min(conversionRate + AI_IMPROVEMENT, 100);
-
-// Admin-effekt
 const adminImpact = 0.002 * adminHours;
-
-// Potentiell intäkt
 const potentialRevenue = inquiries * projectValue * (improvedConversionRate / 100) * (1 + adminImpact);
-
-// Pengar på bordet
 const lostRevenue = potentialRevenue - currentRevenue;
 
 currentRevenueEl.textContent = formatCurrency(currentRevenue);
@@ -394,7 +378,6 @@ lostRevenueYearEl.style.transform='scale(1)';
 }, 200);
 }
 
-// Initial lock state
 explanationVideoSection.classList.add('locked');
 fullAIDemoSection.classList.add('locked');
 qualifiedText.style.display = 'none';
@@ -402,7 +385,6 @@ qualifiedText.style.display = 'none';
 calculateButton.addEventListener('click', () => {
 updateCalculations();
 
-// Unlock explanation video
 explanationVideoSection.classList.remove('locked');
 explanationVideoSection.innerHTML = `
 <video controls poster="stillbild1.png" style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
@@ -422,8 +404,8 @@ if(e.target && e.target.id == 'unlockFullAIDemo'){
 fullAIDemoSection.classList.remove('locked');
 fullAIDemoSection.innerHTML = `
 <video controls poster="stillbild2.png" style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
-  <source src="lang_ai_demo12.mp4" type="video/mp4">
-  Din webbläsare stödjer inte videouppspelning.
+ <source src="lang_ai_demo12.mp4" type="video/mp4">
+ Din webbläsare stödjer inte videouppspelning.
 </video>
 `;
 step3.querySelector('.icon').textContent = '✅';
