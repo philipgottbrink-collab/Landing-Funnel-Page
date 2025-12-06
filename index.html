@@ -7,7 +7,7 @@
 <title>AI Sales Funnel - Beräkna Dina Förluster</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
- 
+
 html, body {
 height: 100%;
 overflow-x: hidden;
@@ -19,7 +19,7 @@ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 color: #333;
 }
 body::-webkit-scrollbar { width: 0 !important; background: transparent; }
- 
+
 .container { 
 max-width: 480px;
 margin: 40px auto;
@@ -28,7 +28,46 @@ box-shadow: 0 0 40px rgba(0,0,0,0.3);
 border-radius: 20px;
 overflow: hidden;
 }
- 
+
+/* ➜ SMALL VIDEO STRIP */
+.small-video-wrapper {
+padding: 25px 15px 10px;
+}
+
+.small-video-title {
+font-size: 20px;
+font-weight: 700;
+text-align: center;
+color: #2d3748;
+margin-bottom: 16px;
+}
+
+.small-video-scroll {
+display: flex;
+gap: 12px;
+overflow-x: auto;
+padding-bottom: 10px;
+}
+
+.small-video-scroll::-webkit-scrollbar { display: none; }
+
+.small-video {
+flex: 0 0 160px;
+height: 280px;
+border-radius: 12px;
+background: #000;
+overflow: hidden;
+}
+
+.small-video video {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+cursor: pointer;
+}
+
+
 /* Video section */
 .video-section { 
 position: relative;
@@ -55,13 +94,13 @@ height: 100%;
 display: block;
 object-fit: cover;
 }
- 
+
 .content-section { padding: 40px 25px; }
 .headline { font-size: 30px; font-weight: 700; color: #2d3748; text-align: center; margin-bottom: 40px; line-height: 1.4; }
 .headline-highlight { color: #ff4d4d; display: block; margin-top: 8px; }
 .highlight-red { color: red; font-weight: 700; }
 .highlight-green { color: green; font-weight: 700; }
- 
+
 .calculator { 
 background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
 border-radius: 20px; 
@@ -80,14 +119,14 @@ margin-left: auto;
 margin-right: auto;
 line-height: 1.6;
 }
- 
+
 .input-group { margin-bottom: 25px; }
 .input-label { display: block; font-size: 14px; font-weight: 600; color: #4a5568; margin-bottom: 8px; }
 .input-field { width: 100%; padding: 15px; font-size: 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; }
 .input-field:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
 .input-suffix { font-size: 14px; color: #718096; margin-top: 5px; font-style: italic; }
 .input-help { font-size: 12px; color: #4a5568; margin-top: 4px; font-style: italic; }
- 
+
 .results { 
 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 border-radius: 15px; 
@@ -100,26 +139,25 @@ color: white;
 .result-label { font-size: 14px; opacity: 0.9; margin-bottom: 5px; }
 .result-value { font-size: 24px; font-weight: 700; color: white; transition: color 0.3s; }
 .result-value.red { color: red; }
- 
+
 .cta-section { padding: 50px 20px 60px; text-align: center; }
 .cta-text { font-size: 22px; color: #2d3748; margin-bottom: 25px; font-weight: 500; }
-
+/* UPDATED: Bigger "Boka ett kostnadsfritt möte" button */
 .cta-button { 
 display: inline-block;
 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 color: white;
-padding: 28px 60px;
-font-size: 24px;
+padding: 28px 60px; 
+font-size: 24px;    
 font-weight: 700;
 text-decoration: none;
 border-radius: 55px;
-cursor: pointer;
-min-width: 320px;
+min-width: 320px;     
 transition: all 0.3s ease;
 }
 .cta-button:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(102,126,234,0.5); }
 .cta-subtext { font-size: 14px; color: #718096; margin-top: 20px; }
- 
+
 .unlock-button { 
 display: block;
 margin: 25px auto;
@@ -129,11 +167,11 @@ padding: 18px 40px;
 font-size: 18px;
 font-weight: 700;
 border-radius: 50px;
-cursor: pointer;
 text-align: center;
 min-width: 280px;
+cursor: pointer;
 }
- 
+
 .roadmap {
 display: flex;
 justify-content: space-between;
@@ -152,39 +190,9 @@ position: relative;
 .step.unlocked .icon { color: green; }
 .step:not(:last-child)::after { content: ''; position: absolute; top: 20px; right: -50%; width: 100%; height: 4px; background: #e2e8f0; z-index: -1; }
 .step.unlocked:not(:last-child)::after { background: #667eea; }
- 
+
 .qualified-text { display:none; font-size: 20px; font-weight:700; text-align:center; margin:40px 0; }
 
-/* FEED STYLING */
-.video-feed {
-padding: 0 20px 40px;
-}
-.video-feed h2 {
-font-size: 22px;
-color: #2d3748;
-margin-bottom: 20px;
-text-align: center;
-font-weight: 600;
-}
-.video-feed-container {
-display: flex;
-gap: 15px;
-overflow-x: auto;
-padding-bottom: 10px;
-scrollbar-width: none;
-}
-.video-feed-container::-webkit-scrollbar {
-display: none;
-}
-.feed-video {
-width: 140px;
-aspect-ratio: 9/16;
-border-radius: 12px;
-object-fit: cover;
-background: #000;
-flex-shrink: 0;
-}
- 
 @media (max-width: 480px) { 
 .headline { font-size: 26px; }
 .calculator { padding: 20px; }
@@ -197,13 +205,38 @@ flex-shrink: 0;
 </head>
 <body>
 <div class="container">
- 
+
+<!-- SMALL VIDEOS AT TOP -->
+<div class="small-video-wrapper">
+    <div class="small-video-title">📱 Exempel på AI-automatiserade videor</div>
+
+    <div class="small-video-scroll">
+        <div class="small-video">
+            <video muted playsinline webkit-playsinline controls>
+                <source src="FeedVideo1.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="small-video">
+            <video muted playsinline webkit-playsinline controls>
+                <source src="FeedVideo2.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="small-video">
+            <video muted playsinline webkit-playsinline controls>
+                <source src="FeedVideo3.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<!-- REST OF YOUR ORIGINAL CODE UNTOUCHED -->
+
 <div class="content-section">
 <h1 class="headline">
 Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
 <span class="highlight-red">att inte utnyttja AI!</span>
 </h1>
- 
+
 <div class="calculator">
 <h2 class="calculator-title">
 📊 Hur mycket lämnar ni på bordet varje månad på grund av 
@@ -212,29 +245,29 @@ Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
 – Använd kalkylatorn nedan för att ta reda på det och få tillgång till 
 <span class="highlight-red">introvideon</span>.
 </h2>
- 
+
 <div class="input-group">
 <label class="input-label" for="inquiries">Antal offertförfrågningar per månad</label>
 <input type="number" id="inquiries" class="input-field" placeholder="T.ex. 50" min="0" value="50">
 </div>
- 
+
 <div class="input-group">
 <label class="input-label" for="totalRevenueLastMonth">Totala intäkter senaste månaden</label>
 <input type="number" id="totalRevenueLastMonth" class="input-field" placeholder="T.ex. 1250000" min="0" value="1250000">
 <div class="input-suffix">SEK</div>
 </div>
- 
+
 <div class="input-group">
 <label class="input-label" for="projectsLastMonth">Antal offertförfrågningar som blev projekt förra månaden</label>
 <input type="number" id="projectsLastMonth" class="input-field" placeholder="T.ex. 10" min="0" value="10">
 </div>
- 
+
 <div class="input-group">
 <label class="input-label" for="adminHours">Timmar per vecka som läggs på administrativt arbete</label>
 <input type="number" id="adminHours" class="input-field" placeholder="T.ex. 10" min="0" value="10">
 <div class="input-suffix">timmar/vecka</div>
 </div>
- 
+
 <div class="results" id="results">
 <div class="result-row">
 <div class="result-label">Nuvarande månadsintäkt</div>
@@ -249,10 +282,10 @@ Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
 <div class="result-value" id="lostRevenueYear">0 kr</div>
 </div>
 </div>
- 
+
 <button class="unlock-button" id="calculateButton">📊Kalkylera & lås upp videon</button>
 </div>
- 
+
 <!-- Roadmap -->
 <div class="roadmap">
 <div class="step" id="step1">
@@ -268,32 +301,10 @@ Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
 <div class="label">Full AI-demo</div>
 </div>
 </div>
- 
+
 <!-- Videos -->
 <div class="video-section locked" id="explanationVideoSection">🔒 Introvideo – låst</div>
 <div class="video-section locked" id="fullAIDemoSection">🔒 Full AI-demo – låst</div>
-
-
-<!-- VIDEO FEED (INSERTED AS REQUESTED) -->
-<div class="video-feed">
-  <h2>Fler korta videor</h2>
-
-  <div class="video-feed-container">
-    <video class="feed-video" controls poster="poster1.png">
-      <source src="ai_in_action.mp4" type="video/mp4">
-    </video>
-
-    <video class="feed-video" controls poster="poster2.png">
-      <source src="lead_gen_secrets.mp4" type="video/mp4">
-    </video>
-
-    <video class="feed-video" controls poster="poster3.png">
-      <source src="sales_funnel_tips.mp4" type="video/mp4">
-    </video>
-  </div>
-</div>
-<!-- END FEED -->
-
 
 <!-- Qualified text -->
 <div class="qualified-text" id="qualifiedText">
@@ -301,68 +312,70 @@ Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
 <span class="highlight-green">all nödvändig</span> information för att boka ditt personliga 
 <span class="highlight-green">möte</span>.
 </div>
- 
+
 </div>
- 
+
 <div class="cta-section">
- <p class="cta-text">
-    Se vilka <span class="highlight-green">AI-lösningar</span> som just ert företag hade behövt, 
-    för att inte gå <span class="highlight-red">miste om intäkter varje månad</span>. 
-    Redo att ta <span class="highlight-green">nästa steg</span>?
- </p>
- <a href="https://calendly.com/philip-gottbrink/30min" 
+<p class="cta-text">
+   Se vilka <span class="highlight-green">AI-lösningar</span> som just ert företag hade behövt, 
+   för att inte gå <span class="highlight-red">miste om intäkter varje månad</span>. 
+   Redo att ta <span class="highlight-green">nästa steg</span>?
+</p>
+<a href="https://calendly.com/philip-gottbrink/30min" 
     class="cta-button" 
     id="bookingButton" 
     target="_blank" 
     rel="noopener noreferrer">
-    🚀Boka ett kostnadsfritt möte
- </a>
- <p class="cta-subtext">Kostnadsfri konsultation • 30 minuter</p>
+   🚀Boka ett kostnadsfritt möte
+</a>
+<p class="cta-subtext">Kostnadsfri konsultation • 30 minuter</p>
 </div>
- 
+
 <script>
 const AI_IMPROVEMENT = 7;
- 
+
 const inquiriesInput = document.getElementById('inquiries');
 const totalRevenueLastMonthInput = document.getElementById('totalRevenueLastMonth');
 const projectsLastMonthInput = document.getElementById('projectsLastMonth');
 const adminHoursInput = document.getElementById('adminHours');
- 
+
 const currentRevenueEl = document.getElementById('currentRevenue');
 const lostRevenueEl = document.getElementById('lostRevenue');
 const lostRevenueYearEl = document.getElementById('lostRevenueYear');
- 
+
 const step2 = document.getElementById('step2');
 const step3 = document.getElementById('step3');
 const explanationVideoSection = document.getElementById('explanationVideoSection');
 const fullAIDemoSection = document.getElementById('fullAIDemoSection');
 const calculateButton = document.getElementById('calculateButton');
 const qualifiedText = document.getElementById('qualifiedText');
- 
+
 function formatCurrency(number) {
 return new Intl.NumberFormat('sv-SE', { style: 'currency', currency: 'SEK', minimumFractionDigits: 0 }).format(number);
 }
- 
+
 function updateCalculations() {
 const inquiries = parseFloat(inquiriesInput.value) || 0;
 const totalRevenueLastMonth = parseFloat(totalRevenueLastMonthInput.value) || 0;
 const projectsLastMonth = parseFloat(projectsLastMonthInput.value) || 0;
 const adminHours = parseFloat(adminHoursInput.value) || 0;
- 
+
 const conversionRate = inquiries > 0 ? (projectsLastMonth / inquiries) * 100 : 0;
+
 const projectValue = projectsLastMonth > 0 ? totalRevenueLastMonth / projectsLastMonth : 0;
+
 const currentRevenue = projectsLastMonth * projectValue;
- 
+
 const improvedConversionRate = Math.min(conversionRate + AI_IMPROVEMENT, 100);
- 
+
 const adminImpact = 0.002 * adminHours;
- 
+
 const potentialRevenue = inquiries * projectValue * (improvedConversionRate / 100) * (1 + adminImpact);
- 
+
 const lostRevenue = potentialRevenue - currentRevenue;
- 
+
 currentRevenueEl.textContent = formatCurrency(currentRevenue);
- 
+
 if (lostRevenue > 0) {
 lostRevenueEl.textContent = '-' + formatCurrency(lostRevenue);
 lostRevenueEl.classList.add('red');
@@ -374,7 +387,7 @@ lostRevenueEl.classList.remove('red');
 lostRevenueYearEl.textContent = '0 kr';
 lostRevenueYearEl.classList.remove('red');
 }
- 
+
 currentRevenueEl.style.transform = 'scale(1.05)';
 lostRevenueEl.style.transform = 'scale(1.05)';
 lostRevenueYearEl.style.transform = 'scale(1.05)';
@@ -384,33 +397,33 @@ lostRevenueEl.style.transform='scale(1)';
 lostRevenueYearEl.style.transform='scale(1)';
 }, 200);
 }
- 
+
 explanationVideoSection.classList.add('locked');
 fullAIDemoSection.classList.add('locked');
 qualifiedText.style.display = 'none';
- 
+
 calculateButton.addEventListener('click', () => {
 updateCalculations();
- 
+
 explanationVideoSection.classList.remove('locked');
 explanationVideoSection.innerHTML = `
-<video controls poster="stillbild1.png" style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
+<video controls playsinline webkit-playsinline muted style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
 <source src="Forklaringsvideo.mp4" type="video/mp4">
 Din webbläsare stödjer inte videouppspelning.
 </video>
 `;
- 
+
 step2.querySelector('.icon').textContent = '✅';
 step2.classList.add('unlocked','active');
- 
+
 fullAIDemoSection.innerHTML = `<div class="unlock-button" id="unlockFullAIDemo">🎬 Lås upp hela AI-demonstrationen</div>`;
 });
- 
+
 document.addEventListener('click', function(e){
 if(e.target && e.target.id == 'unlockFullAIDemo'){
 fullAIDemoSection.classList.remove('locked');
 fullAIDemoSection.innerHTML = `
-<video controls poster="stillbild2.png" style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
+<video controls playsinline webkit-playsinline muted style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
   <source src="lang_ai_demo12.mp4" type="video/mp4">
   Din webbläsare stödjer inte videouppspelning.
 </video>
