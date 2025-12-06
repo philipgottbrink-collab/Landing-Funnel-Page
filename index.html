@@ -7,7 +7,7 @@
 <title>AI Sales Funnel - Beräkna Dina Förluster</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
+ 
 html, body {
 height: 100%;
 overflow-x: hidden;
@@ -19,7 +19,7 @@ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 color: #333;
 }
 body::-webkit-scrollbar { width: 0 !important; background: transparent; }
-
+ 
 .container { 
 max-width: 480px;
 margin: 40px auto;
@@ -28,46 +28,7 @@ box-shadow: 0 0 40px rgba(0,0,0,0.3);
 border-radius: 20px;
 overflow: hidden;
 }
-
-/* ➜ SMALL VIDEO STRIP */
-.small-video-wrapper {
-padding: 25px 15px 10px;
-}
-
-.small-video-title {
-font-size: 20px;
-font-weight: 700;
-text-align: center;
-color: #2d3748;
-margin-bottom: 16px;
-}
-
-.small-video-scroll {
-display: flex;
-gap: 12px;
-overflow-x: auto;
-padding-bottom: 10px;
-}
-
-.small-video-scroll::-webkit-scrollbar { display: none; }
-
-.small-video {
-flex: 0 0 160px;
-height: 280px;
-border-radius: 12px;
-background: #000;
-overflow: hidden;
-}
-
-.small-video video {
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block;
-cursor: pointer;
-}
-
-
+ 
 /* Video section */
 .video-section { 
 position: relative;
@@ -94,13 +55,13 @@ height: 100%;
 display: block;
 object-fit: cover;
 }
-
+ 
 .content-section { padding: 40px 25px; }
 .headline { font-size: 30px; font-weight: 700; color: #2d3748; text-align: center; margin-bottom: 40px; line-height: 1.4; }
 .headline-highlight { color: #ff4d4d; display: block; margin-top: 8px; }
 .highlight-red { color: red; font-weight: 700; }
 .highlight-green { color: green; font-weight: 700; }
-
+ 
 .calculator { 
 background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
 border-radius: 20px; 
@@ -119,14 +80,14 @@ margin-left: auto;
 margin-right: auto;
 line-height: 1.6;
 }
-
+ 
 .input-group { margin-bottom: 25px; }
 .input-label { display: block; font-size: 14px; font-weight: 600; color: #4a5568; margin-bottom: 8px; }
 .input-field { width: 100%; padding: 15px; font-size: 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; }
 .input-field:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
 .input-suffix { font-size: 14px; color: #718096; margin-top: 5px; font-style: italic; }
 .input-help { font-size: 12px; color: #4a5568; margin-top: 4px; font-style: italic; }
-
+ 
 .results { 
 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 border-radius: 15px; 
@@ -139,25 +100,26 @@ color: white;
 .result-label { font-size: 14px; opacity: 0.9; margin-bottom: 5px; }
 .result-value { font-size: 24px; font-weight: 700; color: white; transition: color 0.3s; }
 .result-value.red { color: red; }
-
+ 
 .cta-section { padding: 50px 20px 60px; text-align: center; }
 .cta-text { font-size: 22px; color: #2d3748; margin-bottom: 25px; font-weight: 500; }
-/* UPDATED: Bigger "Boka ett kostnadsfritt möte" button */
+
 .cta-button { 
 display: inline-block;
 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 color: white;
-padding: 28px 60px; 
-font-size: 24px;    
+padding: 28px 60px;
+font-size: 24px;
 font-weight: 700;
 text-decoration: none;
 border-radius: 55px;
-min-width: 320px;     
+cursor: pointer;
+min-width: 320px;
 transition: all 0.3s ease;
 }
 .cta-button:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(102,126,234,0.5); }
 .cta-subtext { font-size: 14px; color: #718096; margin-top: 20px; }
-
+ 
 .unlock-button { 
 display: block;
 margin: 25px auto;
@@ -167,11 +129,11 @@ padding: 18px 40px;
 font-size: 18px;
 font-weight: 700;
 border-radius: 50px;
+cursor: pointer;
 text-align: center;
 min-width: 280px;
-cursor: pointer;
 }
-
+ 
 .roadmap {
 display: flex;
 justify-content: space-between;
@@ -190,8 +152,39 @@ position: relative;
 .step.unlocked .icon { color: green; }
 .step:not(:last-child)::after { content: ''; position: absolute; top: 20px; right: -50%; width: 100%; height: 4px; background: #e2e8f0; z-index: -1; }
 .step.unlocked:not(:last-child)::after { background: #667eea; }
-
+ 
 .qualified-text { display:none; font-size: 20px; font-weight:700; text-align:center; margin:40px 0; }
+
+/* SMALL VIDEO FEED TOP */
+.video-feed {
+padding: 20px;
+text-align: center;
+}
+.video-feed h2 {
+font-size: 22px;
+color: #2d3748;
+margin-bottom: 20px;
+font-weight: 600;
+}
+.video-feed-container {
+display: flex;
+justify-content: space-between;
+gap: 10px;
+flex-wrap: nowrap;
+overflow-x: auto;
+padding-bottom: 10px;
+}
+.video-feed-container::-webkit-scrollbar {
+display: none;
+}
+.feed-video {
+width: 140px;
+aspect-ratio: 9/16;
+border-radius: 12px;
+object-fit: cover;
+flex-shrink: 0;
+background: #000;
+}
 
 @media (max-width: 480px) { 
 .headline { font-size: 26px; }
@@ -200,37 +193,33 @@ position: relative;
 .input-help { font-size: 11px; }
 .cta-text { font-size: 20px; }
 .cta-button { font-size: 20px; padding: 22px 50px; }
+.feed-video { width: 100px; }
 }
 </style>
 </head>
 <body>
 <div class="container">
 
-<!-- SMALL VIDEOS AT TOP -->
-<div class="small-video-wrapper">
-    <div class="small-video-title">📱 Exempel på AI-automatiserade videor</div>
-
-    <div class="small-video-scroll">
-        <div class="small-video">
-            <video muted playsinline webkit-playsinline controls>
-                <source src="FeedVideo1.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="small-video">
-            <video muted playsinline webkit-playsinline controls>
-                <source src="FeedVideo2.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="small-video">
-            <video muted playsinline webkit-playsinline controls>
-                <source src="FeedVideo3.mp4" type="video/mp4">
-            </video>
-        </div>
-    </div>
+<!-- SMALL VIDEO FEED AT TOP -->
+<div class="video-feed">
+  <h2>Fler korta videor</h2>
+  <div class="video-feed-container">
+    <video class="feed-video" controls>
+      <source src="ai_in_action.mp4" type="video/mp4">
+      Din webbläsare stödjer inte videouppspelning.
+    </video>
+    <video class="feed-video" controls>
+      <source src="lead_gen_secrets.mp4" type="video/mp4">
+      Din webbläsare stödjer inte videouppspelning.
+    </video>
+    <video class="feed-video" controls>
+      <source src="sales_funnel_tips.mp4" type="video/mp4">
+      Din webbläsare stödjer inte videouppspelning.
+    </video>
+  </div>
 </div>
 
-<!-- REST OF YOUR ORIGINAL CODE UNTOUCHED -->
-
+<!-- ORIGINAL CONTENT -->
 <div class="content-section">
 <h1 class="headline">
 Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
@@ -302,7 +291,7 @@ Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
 </div>
 </div>
 
-<!-- Videos -->
+<!-- Big Videos -->
 <div class="video-section locked" id="explanationVideoSection">🔒 Introvideo – låst</div>
 <div class="video-section locked" id="fullAIDemoSection">🔒 Full AI-demo – låst</div>
 
@@ -316,19 +305,19 @@ Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
 </div>
 
 <div class="cta-section">
-<p class="cta-text">
-   Se vilka <span class="highlight-green">AI-lösningar</span> som just ert företag hade behövt, 
-   för att inte gå <span class="highlight-red">miste om intäkter varje månad</span>. 
-   Redo att ta <span class="highlight-green">nästa steg</span>?
-</p>
-<a href="https://calendly.com/philip-gottbrink/30min" 
+ <p class="cta-text">
+    Se vilka <span class="highlight-green">AI-lösningar</span> som just ert företag hade behövt, 
+    för att inte gå <span class="highlight-red">miste om intäkter varje månad</span>. 
+    Redo att ta <span class="highlight-green">nästa steg</span>?
+ </p>
+ <a href="https://calendly.com/philip-gottbrink/30min" 
     class="cta-button" 
     id="bookingButton" 
     target="_blank" 
     rel="noopener noreferrer">
-   🚀Boka ett kostnadsfritt möte
-</a>
-<p class="cta-subtext">Kostnadsfri konsultation • 30 minuter</p>
+    🚀Boka ett kostnadsfritt möte
+ </a>
+ <p class="cta-subtext">Kostnadsfri konsultation • 30 minuter</p>
 </div>
 
 <script>
@@ -361,9 +350,7 @@ const projectsLastMonth = parseFloat(projectsLastMonthInput.value) || 0;
 const adminHours = parseFloat(adminHoursInput.value) || 0;
 
 const conversionRate = inquiries > 0 ? (projectsLastMonth / inquiries) * 100 : 0;
-
 const projectValue = projectsLastMonth > 0 ? totalRevenueLastMonth / projectsLastMonth : 0;
-
 const currentRevenue = projectsLastMonth * projectValue;
 
 const improvedConversionRate = Math.min(conversionRate + AI_IMPROVEMENT, 100);
@@ -407,7 +394,7 @@ updateCalculations();
 
 explanationVideoSection.classList.remove('locked');
 explanationVideoSection.innerHTML = `
-<video controls playsinline webkit-playsinline muted style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
+<video controls poster="stillbild1.png" style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
 <source src="Forklaringsvideo.mp4" type="video/mp4">
 Din webbläsare stödjer inte videouppspelning.
 </video>
@@ -423,7 +410,7 @@ document.addEventListener('click', function(e){
 if(e.target && e.target.id == 'unlockFullAIDemo'){
 fullAIDemoSection.classList.remove('locked');
 fullAIDemoSection.innerHTML = `
-<video controls playsinline webkit-playsinline muted style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
+<video controls poster="stillbild2.png" style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
   <source src="lang_ai_demo12.mp4" type="video/mp4">
   Din webbläsare stödjer inte videouppspelning.
 </video>
