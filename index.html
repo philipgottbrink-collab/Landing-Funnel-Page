@@ -230,13 +230,50 @@ Upptäck vad det <span class="highlight-red">kostar</span> ditt företag
 <span class="highlight-red">att inte utnyttja AI!</span>
 </h1>
 
-<!-- NEW BIG VIDEO ADDED BETWEEN THE TWO TEXTS -->
 <div class="video-section">
-  <video controls poster="stillbild3.png" style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover;">
+  <video 
+    id="autoplayIntroVideo"
+    autoplay 
+    muted 
+    playsinline 
+    loop
+    poster="stillbild3.png"
+    style="aspect-ratio:9/16; width:100%; height:auto; object-fit:cover; cursor:pointer;"
+  >
     <source src="AI_Impact_Overview.mp4" type="video/mp4">
     Din webbläsare stödjer inte videouppspelning.
   </video>
 </div>
+
+<script>
+const introVideo = document.getElementById("autoplayIntroVideo");
+
+// When user clicks: open fullscreen, unmute, restart the video
+introVideo.addEventListener("click", async () => {
+
+  try {
+    // Fullscreen request
+    if (introVideo.requestFullscreen) {
+      await introVideo.requestFullscreen();
+    } else if (introVideo.webkitRequestFullscreen) {
+      await introVideo.webkitRequestFullscreen();
+    } else if (introVideo.msRequestFullscreen) {
+      await introVideo.msRequestFullscreen();
+    }
+  } catch (err) {
+    console.log("Fullscreen not available:", err);
+  }
+
+  // Restart from beginning
+  introVideo.currentTime = 0;
+
+  // Unmute so sound plays
+  introVideo.muted = false;
+
+  // Play with sound
+  introVideo.play();
+});
+</script>
 
 <div class="calculator">
 <h2 class="calculator-title">
